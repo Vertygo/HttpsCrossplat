@@ -1,0 +1,28 @@
+services:
+  api1:
+    hostname: api1.inventory.local
+    build:
+      context: .
+      dockerfile: ./API1/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/certs/inventory.local.key
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/certs/inventory.local.crt
+    ports:
+      - 10000:80
+      - 10001:443
+
+  api2:
+    hostname: api2.inventory.local
+    build:
+      context: .
+      dockerfile: ./API2/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/certs/inventory.local.key
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/certs/inventory.local.crt
+    ports:
+      - 20000:80
+      - 20001:443
